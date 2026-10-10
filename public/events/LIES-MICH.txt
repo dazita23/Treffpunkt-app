@@ -1,0 +1,12 @@
+Hier kommen die Event-Bilder hinein (JPG oder PNG, ideal ca. 1200 x 600 Pixel, unter 300 KB).
+
+1. Bild hier ablegen, z. B. james-blake.jpg
+2. In lib/data.ts beim Event ergänzen:
+     image: "/events/james-blake.jpg",
+     imageCredit: "Foto: Name / Quelle",
+
+Nur Bilder verwenden, die ihr nutzen dürft:
+- eigene Fotos (ohne erkennbare fremde Personen oder mit deren Einverständnis)
+- Bilder mit freier Lizenz, z. B. von unsplash.com oder pexels.com
+- Bilder, für die der Veranstalter euch die Erlaubnis gegeben hat
+Bilder von Ticket- oder Veranstalterseiten nicht einfach kopieren – die sind urheberrechtlich geschützt.

@@ -22,7 +22,8 @@ kommen in Stufe 2 mit Supabase.
 
 | Datei | Inhalt |
 |---|---|
-| `lib/data.ts` | **Events, Beispielprofile, Gruppen** – hier tragt ihr die echten Events ein |
+| `lib/data.ts` | **Events, Beispielprofile, Gruppen** – hier tragt ihr Events ein |
+| `public/events/` | Event-Bilder (Anleitung in LIES-MICH.txt) |
 | `app/globals.css` | Farben (aus der Pitch-Präsentation) |
 | `public/logo.png` | Logo |
 | `app/page.tsx` | Seite „Entdecken“ |

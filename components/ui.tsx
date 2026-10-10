@@ -183,13 +183,24 @@ export function EventVisual({
   category,
   className = "",
   iconSize = 40,
+  image,
 }: {
   category: Category;
   className?: string;
   iconSize?: number;
+  image?: string;
 }) {
   const s = CATEGORY_STYLE[category];
   const Icon = s.icon;
+  if (image) {
+    return (
+      <div className={`relative overflow-hidden ${className}`} style={{ background: s.from }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={image} alt="" className="absolute inset-0 size-full object-cover" loading="lazy" />
+        <span className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" aria-hidden />
+      </div>
+    );
+  }
   return (
     <div
       className={`relative overflow-hidden ${className}`}
@@ -251,7 +262,7 @@ export function EventCard({ ev }: { ev: EventItem }) {
       className="block overflow-hidden rounded-3xl border border-line bg-white transition hover:shadow-[0_8px_24px_rgba(26,21,48,0.10)]"
     >
       <div className="relative">
-        <EventVisual category={ev.category} className="h-32" iconSize={34} />
+        <EventVisual category={ev.category} className="h-32" iconSize={34} image={ev.image} />
         <span className="absolute top-3 left-3">
           <DateStub dayOffset={ev.dayOffset} />
         </span>

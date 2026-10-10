@@ -41,10 +41,13 @@ export default function EventDetail() {
       <BackHeader title={ev.category} />
       <div className="px-5">
         <div className="relative">
-          <EventVisual category={ev.category} className="h-48 rounded-3xl" iconSize={48} />
+          <EventVisual category={ev.category} className="h-48 rounded-3xl" iconSize={48} image={ev.image} />
           <span className="absolute top-4 left-4">
             <DateStub dayOffset={ev.dayOffset} />
           </span>
+          {ev.imageCredit && (
+            <span className="absolute right-3 bottom-2 rounded bg-black/40 px-1.5 py-0.5 text-[10px] text-white/90">{ev.imageCredit}</span>
+          )}
         </div>
         <p className="mt-4 text-sm font-semibold text-muted">
           {formatDay(ev.dayOffset)} · {formatTime(ev.time)}

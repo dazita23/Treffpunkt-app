@@ -34,7 +34,7 @@ export default function Chats() {
             return (
               <li key={g.id}>
                 <Link href={`/chats/${g.id}`} className="flex items-center gap-3 rounded-2xl p-3 hover:bg-surface">
-                  <EventVisual category={ev.category} className="size-14 shrink-0 rounded-2xl" iconSize={22} />
+                  <EventVisual category={ev.category} className="size-14 shrink-0 rounded-2xl" iconSize={22} image={ev.image} />
                   <div className="min-w-0 flex-1">
                     <p className="truncate font-bold text-ink">{g.name}</p>
                     <p className="truncate text-xs font-semibold text-muted">

@@ -29,7 +29,9 @@ type State = {
 };
 
 const EMPTY: State = { account: null, loggedIn: false, going: [], groups: SEED_GROUPS, reports: [] };
-const KEY = "treffpunkt-prototyp-v2"; // Version erhöhen, wenn sich die Events grundlegend ändern
+const KEY = "treffpunkt-prototyp-v2";
+// Ältere Speicherstände: daraus wird nur das Konto übernommen
+const LEGACY_KEYS = ["treffpunkt-prototyp-v1"];
 
 export const DEMO_ACCOUNT: Account = {
   name: "Alex",
@@ -57,6 +59,15 @@ type Ctx = State & {
   report: (personId: string, reason: string) => void;
 };
 
+// Passt gespeicherte Daten an geänderte Events an:
+// Teilnahmen/Gruppen zu gelöschten Events fallen weg, neue Beispielgruppen kommen dazu.
+function cleanUp(s: State): State {
+  const exists = (id: string) => EVENTS.some((e) => e.id === id);
+  const groups = s.groups.filter((g) => exists(g.eventId));
+  for (const seed of SEED_GROUPS) if (!groups.some((g) => g.id === seed.id)) groups.push(seed);
+  return { ...s, going: s.going.filter(exists), groups };
+}
+
 const AppContext = createContext<Ctx | null>(null);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
@@ -68,7 +79,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(KEY);
-      if (raw) setState({ ...EMPTY, ...JSON.parse(raw) });
+      if (raw) {
+        setState(cleanUp({ ...EMPTY, ...JSON.parse(raw) }));
+      } else {
+        // Konto aus einem älteren Speicherstand übernehmen (Events & Gruppen starten neu)
+        for (const old of LEGACY_KEYS) {
+          const legacy = localStorage.getItem(old);
+          if (!legacy) continue;
+          const prev = JSON.parse(legacy) as Partial<State>;
+          if (prev.account) setState({ ...EMPTY, account: prev.account, loggedIn: !!prev.loggedIn });
+          localStorage.removeItem(old);
+          break;
+        }
+      }
     } catch {
       /* ohne gespeicherte Daten weiter */
     }

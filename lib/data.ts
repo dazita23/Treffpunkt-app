@@ -52,6 +52,10 @@ type EventInput = {
   description: string;
   ticketUrl: string;
   tags: string[]; // passende Interessen (siehe INTERESTS)
+  // Optional: Bild zum Event. Datei in den Ordner public/events/ legen und hier
+  // z. B. "/events/james-blake.jpg" eintragen. Nur Bilder verwenden, die ihr nutzen dürft!
+  image?: string;
+  imageCredit?: string; // Bildnachweis, z. B. "Foto: Max Muster / Unsplash"
 };
 
 export type EventItem = EventInput & { dayOffset: number }; // dayOffset = Tage ab heute (0 = heute)
