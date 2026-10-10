@@ -32,7 +32,7 @@ export default function PersonProfil() {
         right={
           <button
             onClick={() => setOpen(true)}
-            className="flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold text-muted hover:bg-lav-50"
+            className="flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold text-muted hover:bg-surface"
             aria-label="Profil melden"
           >
             <Flag size={16} /> Melden
@@ -41,23 +41,23 @@ export default function PersonProfil() {
       />
       <div className="flex flex-col items-center px-5 text-center">
         <Avatar id={p.id} name={p.name} size={96} />
-        <h1 className="mt-3 text-2xl font-extrabold text-brand-dark">
+        <h1 className="mt-3 text-2xl font-extrabold text-ink">
           {p.name}, {p.age}
         </h1>
         <p className="text-sm text-muted">{p.city}</p>
         <p className="mt-3 text-ink/85">{p.bio}</p>
         {reported && (
-          <p className="mt-3 flex items-center gap-1.5 rounded-full bg-lav-50 px-3 py-1.5 text-xs font-semibold text-brand">
+          <p className="mt-3 flex items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 text-xs font-semibold text-ink">
             <CheckCircle2 size={14} /> Du hast dieses Profil gemeldet
           </p>
         )}
       </div>
 
       <section className="mt-6 px-5">
-        <h2 className="text-sm font-bold tracking-wide text-muted uppercase">Interessen</h2>
+        <h2 className="text-sm font-bold text-ink">Interessen</h2>
         <div className="mt-2 flex flex-wrap gap-2">
           {p.interests.map((i) => (
-            <Chip key={i} active={common.includes(i)}>
+            <Chip key={i} active={common.includes(i)} tone="social">
               {i}
             </Chip>
           ))}
@@ -66,7 +66,7 @@ export default function PersonProfil() {
       </section>
 
       <section className="mt-6 px-5">
-        <h2 className="text-sm font-bold tracking-wide text-muted uppercase">Geht zu</h2>
+        <h2 className="text-sm font-bold text-ink">Geht zu</h2>
         <ul className="mt-2 flex flex-col gap-3">
           {theirEvents.map((e) => (
             <li key={e.id}>
@@ -77,12 +77,12 @@ export default function PersonProfil() {
       </section>
 
       {open && (
-        <div className="fixed inset-0 z-30 flex items-end justify-center bg-brand-deep/40" role="dialog" aria-modal="true" aria-labelledby="melden-titel">
+        <div className="fixed inset-0 z-30 flex items-end justify-center bg-ink/50" role="dialog" aria-modal="true" aria-labelledby="melden-titel">
           <div className="w-full max-w-[440px] rounded-t-3xl bg-white p-5 pb-8">
             {reported ? (
               <div className="flex flex-col items-center py-4 text-center">
                 <CheckCircle2 size={44} className="text-brand" />
-                <h2 id="melden-titel" className="mt-3 text-lg font-extrabold text-brand-dark">
+                <h2 id="melden-titel" className="mt-3 text-lg font-extrabold text-ink">
                   Danke für deine Meldung
                 </h2>
                 <p className="mt-1 text-sm text-muted">Unser Team prüft das Profil. {p.name} erfährt nicht, wer gemeldet hat.</p>
@@ -93,17 +93,17 @@ export default function PersonProfil() {
             ) : (
               <>
                 <div className="flex items-center justify-between">
-                  <h2 id="melden-titel" className="text-lg font-extrabold text-brand-dark">
+                  <h2 id="melden-titel" className="text-lg font-extrabold text-ink">
                     {p.name} melden
                   </h2>
-                  <button onClick={() => setOpen(false)} className="grid size-9 place-items-center rounded-full hover:bg-lav-50" aria-label="Schließen">
+                  <button onClick={() => setOpen(false)} className="grid size-9 place-items-center rounded-full hover:bg-surface" aria-label="Schließen">
                     <X size={20} />
                   </button>
                 </div>
                 <p className="mt-1 text-sm text-muted">Warum möchtest du dieses Profil melden?</p>
                 <div className="mt-4 flex flex-col gap-2">
                   {REPORT_REASONS.map((r) => (
-                    <label key={r} className={`flex items-center gap-3 rounded-xl border p-3 ${reason === r ? "border-brand bg-lav-50" : "border-lav-200"}`}>
+                    <label key={r} className={`flex items-center gap-3 rounded-xl border p-3 ${reason === r ? "border-brand bg-surface" : "border-line"}`}>
                       <input type="radio" name="grund" value={r} checked={reason === r} onChange={() => setReason(r)} className="size-4 accent-brand" />
                       <span className="text-sm font-medium">{r}</span>
                     </label>

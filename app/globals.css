@@ -1,30 +1,39 @@
 @import "tailwindcss";
 @import "@fontsource-variable/plus-jakarta-sans";
 
-/* Treffpunkt-Farben aus der Pitch-Präsentation */
+/* Treffpunkt-Farben
+   Lila = Markenfarbe (Logo, Buttons, aktive Navigation)
+   Pink = alles Soziale (gleiche Interessen, "Du gehst hin")
+   Neutrale Flächen statt Lila überall; Farbe kommt über die Event-Kategorien. */
 @theme {
   --font-sans: "Plus Jakarta Sans Variable", system-ui, sans-serif;
 
-  --color-brand: #5229a5;        /* Hauptfarbe (Buttons, Akzente) */
-  --color-brand-dark: #49329e;   /* Überschriften */
-  --color-brand-deep: #2e1a6e;   /* dunkle Flächen */
-  --color-brand-bright: #5b21d6; /* Logo-Lila */
-  --color-lav-50: #f8f5fc;       /* Kartenhintergrund */
-  --color-lav-100: #ece8f6;      /* Icon-Kreise */
-  --color-lav-200: #d8c3f9;      /* Banner */
-  --color-lav-400: #a38fd8;      /* Linien */
-  --color-muted: #8e77c3;        /* Nebentexte */
-  --color-ink: #1e1b2e;          /* Fließtext */
+  --color-brand: #5229a5;        /* Hauptfarbe: Buttons, Links, aktive Tabs */
+  --color-brand-dark: #3d2591;   /* Hover */
+  --color-brand-soft: #efe9fb;   /* zarter Lila-Hintergrund */
+  --color-social: #e8336f;       /* Pink: Leute & Gemeinsamkeiten */
+  --color-social-soft: #ffe8ef;
+  --color-surface: #f5f4f7;      /* Karten, Eingabefelder */
+  --color-surface-2: #ebe9ef;    /* gedrückt / Hover */
+  --color-line: #e2dfe8;         /* Rahmen */
+  --color-line-strong: #b9b3c6;  /* gestrichelte Rahmen */
+  --color-muted: #6b6680;        /* Nebentexte */
+  --color-ink: #1a1530;          /* Überschriften & Fließtext */
 }
 
 html,
 body {
-  background: var(--color-lav-100);
+  background: #e9e7ee;
   color: var(--color-ink);
   -webkit-tap-highlight-color: transparent;
 }
 
-/* dünne Scrollbar für horizontale Filterleisten ausblenden */
+:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* Scrollbar der horizontalen Filterleisten ausblenden */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

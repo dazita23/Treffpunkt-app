@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { Search, SearchX } from "lucide-react";
 import { CATEGORIES, EVENTS } from "@/lib/data";
 import { useApp } from "@/lib/store";
-import { Chip, EmptyState, EventCard, LogoHeader, input } from "@/components/ui";
+import { CategoryDot, Chip, EmptyState, EventCard, LogoHeader, input } from "@/components/ui";
 
 // Entdecken: Eventübersicht mit Filter nach Kategorie und Datum
 
@@ -42,12 +42,12 @@ export default function Entdecken() {
     <div>
       <LogoHeader
         right={
-          <div className="flex rounded-full bg-lav-50 p-1 text-xs font-bold">
+          <div className="flex rounded-full bg-surface-2 p-1 text-xs font-bold">
             {["Alle", "Köln", "Bonn"].map((c) => (
               <button
                 key={c}
                 onClick={() => setCity(c)}
-                className={`rounded-full px-3 py-1.5 ${city === c ? "bg-brand text-white" : "text-brand-dark"}`}
+                className={`rounded-full px-3 py-1.5 ${city === c ? "bg-white text-ink shadow-sm" : "text-muted"}`}
                 aria-pressed={city === c}
               >
                 {c}
@@ -57,7 +57,7 @@ export default function Entdecken() {
         }
       />
       <div className="px-5 pt-1">
-        <h1 className="text-2xl font-extrabold text-brand-dark">Hey {me?.name} 👋</h1>
+        <h1 className="text-2xl font-extrabold text-ink">Hey {me?.name} 👋</h1>
         <p className="text-sm text-muted">Worauf hast du Lust?</p>
         <div className="relative mt-4">
           <Search className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-muted" size={18} />
@@ -66,8 +66,12 @@ export default function Entdecken() {
       </div>
 
       <div className="no-scrollbar mt-4 flex gap-2 overflow-x-auto px-5" role="group" aria-label="Kategorie">
-        {["Alle", ...CATEGORIES].map((c) => (
+        <Chip active={cat === "Alle"} onClick={() => setCat("Alle")}>
+          Alle
+        </Chip>
+        {CATEGORIES.map((c) => (
           <Chip key={c} active={cat === c} onClick={() => setCat(c)}>
+            <CategoryDot category={c} />
             {c}
           </Chip>
         ))}
@@ -80,11 +84,11 @@ export default function Entdecken() {
         ))}
       </div>
 
-      <p className="px-5 pt-5 pb-2 text-xs font-bold tracking-wide text-muted uppercase">{list.length} Events</p>
+      <p className="px-5 pt-5 pb-2 text-sm font-semibold text-muted">{list.length} Events</p>
       {list.length === 0 ? (
         <EmptyState icon={SearchX} title="Keine Events gefunden" text="Probier einen anderen Filter oder Zeitraum." />
       ) : (
-        <ul className="flex flex-col gap-3 px-5">
+        <ul className="flex flex-col gap-4 px-5">
           {list.map((e) => (
             <li key={e.id}>
               <EventCard ev={e} />

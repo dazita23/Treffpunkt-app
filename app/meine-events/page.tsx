@@ -24,7 +24,7 @@ export default function MeineEvents() {
           }
         />
       ) : (
-        <ul className="flex flex-col gap-3 px-5">
+        <ul className="flex flex-col gap-4 px-5">
           {mine.map((e) => (
             <li key={e.id}>
               <EventCard ev={e} />

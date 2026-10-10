@@ -49,7 +49,7 @@ export default function ChatDetail() {
                 leaveGroup(g.id);
                 router.push("/chats");
               }}
-              className="grid size-10 place-items-center rounded-full text-muted hover:bg-lav-50"
+              className="grid size-10 place-items-center rounded-full text-muted hover:bg-surface"
               aria-label="Gruppe verlassen"
               title="Gruppe verlassen"
             >
@@ -58,10 +58,10 @@ export default function ChatDetail() {
           ) : null
         }
       />
-      <Link href={`/event/${ev.id}`} className="mx-4 flex items-center gap-3 rounded-2xl bg-lav-50 px-4 py-2.5">
+      <Link href={`/event/${ev.id}`} className="mx-4 flex items-center gap-3 rounded-2xl bg-surface px-4 py-2.5">
         <AvatarStack people={members} max={5} />
         <div className="min-w-0 flex-1 text-right">
-          <p className="truncate text-xs font-bold text-brand">{ev.title}</p>
+          <p className="truncate text-xs font-bold text-ink">{ev.title}</p>
           <p className="text-xs text-muted">
             {formatDay(ev.dayOffset)} · {ev.time} Uhr
           </p>
@@ -81,8 +81,8 @@ export default function ChatDetail() {
             return (
               <li key={msg.id} className={`flex items-end gap-2 ${mine ? "flex-row-reverse" : ""}`}>
                 {!mine && <Avatar id={msg.authorId} name={author?.name ?? "?"} size={30} />}
-                <div className={`max-w-[75%] rounded-2xl px-3.5 py-2 ${mine ? "rounded-br-md bg-brand text-white" : "rounded-bl-md bg-lav-50 text-ink"}`}>
-                  {!mine && <p className="text-[11px] font-bold text-brand">{author?.name}</p>}
+                <div className={`max-w-[75%] rounded-2xl px-3.5 py-2 ${mine ? "rounded-br-md bg-brand text-white" : "rounded-bl-md bg-surface-2 text-ink"}`}>
+                  {!mine && <p className="text-[11px] font-bold text-muted">{author?.name}</p>}
                   <p className="text-[15px] leading-snug">{msg.text}</p>
                   <p className={`mt-0.5 text-right text-[10px] ${mine ? "text-white/70" : "text-muted"}`}>
                     {new Date(msg.at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })}
@@ -96,12 +96,12 @@ export default function ChatDetail() {
       </div>
 
       {member ? (
-        <form onSubmit={submit} className="flex items-center gap-2 border-t border-lav-100 bg-white px-3 py-3 pb-[max(12px,env(safe-area-inset-bottom))]">
+        <form onSubmit={submit} className="flex items-center gap-2 border-t border-surface-2 bg-white px-3 py-3 pb-[max(12px,env(safe-area-inset-bottom))]">
           <input
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Nachricht schreiben …"
-            className="flex-1 rounded-full bg-lav-50 px-4 py-3 outline-none focus:ring-2 focus:ring-lav-200"
+            className="flex-1 rounded-full bg-surface px-4 py-3 outline-none focus:ring-2 focus:ring-line"
             aria-label="Nachricht"
           />
           <button disabled={!text.trim()} className="grid size-12 place-items-center rounded-full bg-brand text-white disabled:opacity-40" aria-label="Senden">
@@ -109,7 +109,7 @@ export default function ChatDetail() {
           </button>
         </form>
       ) : (
-        <div className="border-t border-lav-100 p-3">
+        <div className="border-t border-surface-2 p-3">
           <button onClick={() => joinGroup(g.id)} className="w-full rounded-full bg-brand py-3.5 font-bold text-white">
             Gruppe beitreten, um zu schreiben
           </button>

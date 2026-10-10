@@ -23,10 +23,10 @@ export default function Profil() {
   return (
     <div className="pt-4">
       <PageTitle title="Profil" />
-      <div className="mx-5 flex items-center gap-4 rounded-3xl bg-lav-50 p-4">
+      <div className="mx-5 flex items-center gap-4 rounded-3xl bg-surface p-4">
         <Avatar id={ME} name={account.name} size={68} />
         <div>
-          <p className="text-xl font-extrabold text-brand-dark">
+          <p className="text-xl font-extrabold text-ink">
             {account.name}, {account.age}
           </p>
           <p className="text-sm text-muted">
@@ -36,11 +36,11 @@ export default function Profil() {
       </div>
 
       <div className="mx-5 mt-3 grid grid-cols-2 gap-3">
-        <div className="rounded-2xl border border-lav-200 p-3 text-center">
-          <p className="text-2xl font-extrabold text-brand">{going.length}</p>
+        <div className="rounded-2xl border border-line p-3 text-center">
+          <p className="text-2xl font-extrabold text-social">{going.length}</p>
           <p className="text-xs font-semibold text-muted">Events</p>
         </div>
-        <div className="rounded-2xl border border-lav-200 p-3 text-center">
+        <div className="rounded-2xl border border-line p-3 text-center">
           <p className="text-2xl font-extrabold text-brand">{groupCount}</p>
           <p className="text-xs font-semibold text-muted">Gruppen</p>
         </div>
@@ -48,7 +48,7 @@ export default function Profil() {
 
       <section className="mt-6 px-5">
         <div className="flex items-center justify-between">
-          <h2 className="text-sm font-bold tracking-wide text-muted uppercase">Meine Interessen</h2>
+          <h2 className="text-sm font-bold text-ink">Meine Interessen</h2>
           <button onClick={() => setEditing((v) => !v)} className="text-sm font-bold text-brand">
             {editing ? "Fertig" : "Bearbeiten"}
           </button>
@@ -63,14 +63,14 @@ export default function Profil() {
       </section>
 
       <section className="mt-8 flex flex-col gap-2 px-5">
-        <button onClick={logout} className="flex items-center gap-3 rounded-2xl p-3 font-semibold text-brand-dark hover:bg-lav-50">
+        <button onClick={logout} className="flex items-center gap-3 rounded-2xl p-3 font-semibold text-ink hover:bg-surface">
           <LogOut size={20} className="text-brand" /> Abmelden
         </button>
         {confirmDelete ? (
           <div className="rounded-2xl border border-red-200 bg-red-50 p-4">
             <p className="text-sm font-semibold text-red-800">Konto wirklich löschen? Alle deine Daten werden entfernt.</p>
             <div className="mt-3 flex gap-2">
-              <button onClick={() => setConfirmDelete(false)} className="flex-1 rounded-full bg-white py-2.5 text-sm font-bold text-brand-dark">
+              <button onClick={() => setConfirmDelete(false)} className="flex-1 rounded-full bg-white py-2.5 text-sm font-bold text-ink">
                 Abbrechen
               </button>
               <button onClick={deleteAccount} className="flex-1 rounded-full bg-red-600 py-2.5 text-sm font-bold text-white">
@@ -85,7 +85,7 @@ export default function Profil() {
         )}
       </section>
 
-      <p className="mx-5 mt-6 mb-4 flex gap-2 rounded-2xl bg-lav-50 p-3 text-xs text-muted">
+      <p className="mx-5 mt-6 mb-4 flex gap-2 rounded-2xl bg-surface p-3 text-xs text-muted">
         <Info size={16} className="shrink-0 text-brand" />
         Prototyp (Stufe 1): Daten werden nur auf diesem Gerät gespeichert. Alle anderen Profile sind simulierte Beispielprofile.
       </p>

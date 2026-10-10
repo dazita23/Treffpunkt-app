@@ -20,12 +20,12 @@ export default function Anmelden() {
     <div>
       <BackHeader />
       <form onSubmit={submit} className="flex flex-col gap-4 px-6 pt-2">
-        <h1 className="text-2xl font-extrabold text-brand-dark">Willkommen zurück</h1>
-        <label className="flex flex-col gap-1.5 text-sm font-semibold text-brand-dark">
+        <h1 className="text-2xl font-extrabold text-ink">Willkommen zurück</h1>
+        <label className="flex flex-col gap-1.5 text-sm font-semibold text-ink">
           E-Mail
           <input className={input} type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </label>
-        <label className="flex flex-col gap-1.5 text-sm font-semibold text-brand-dark">
+        <label className="flex flex-col gap-1.5 text-sm font-semibold text-ink">
           Passwort
           <input className={input} type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </label>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Check, ExternalLink, MapPin, MessageCircle, Plus, Ticket, Users } from "lucide-react";
-import { Avatar, AvatarStack, BackHeader, Chip, EmptyState, EventVisual, btnPrimary, input } from "@/components/ui";
+import { Avatar, AvatarStack, BackHeader, Chip, DateStub, EmptyState, EventVisual, btnPrimary, input } from "@/components/ui";
 import { ME, attendeesOf, eventById, formatDay, personById, shared, useApp } from "@/lib/store";
 
 export default function EventDetail() {
@@ -40,11 +40,16 @@ export default function EventDetail() {
     <div className="pb-10">
       <BackHeader title={ev.category} />
       <div className="px-5">
-        <EventVisual category={ev.category} className="h-44 rounded-3xl" />
-        <p className="mt-4 text-sm font-bold text-brand">
+        <div className="relative">
+          <EventVisual category={ev.category} className="h-48 rounded-3xl" iconSize={48} />
+          <span className="absolute top-4 left-4">
+            <DateStub dayOffset={ev.dayOffset} />
+          </span>
+        </div>
+        <p className="mt-4 text-sm font-semibold text-muted">
           {formatDay(ev.dayOffset)} · {ev.time} Uhr
         </p>
-        <h1 className="mt-1 text-2xl leading-tight font-extrabold text-brand-dark">{ev.title}</h1>
+        <h1 className="mt-1 text-2xl leading-tight font-extrabold text-ink">{ev.title}</h1>
         <div className="mt-3 space-y-1.5 text-sm text-ink/80">
           <p className="flex items-center gap-2">
             <MapPin size={16} className="text-brand" /> {ev.venue}, {ev.address}
@@ -57,7 +62,7 @@ export default function EventDetail() {
         <div className="mt-5 grid grid-cols-2 gap-3">
           <button
             onClick={() => toggleGoing(ev.id)}
-            className={amGoing ? "inline-flex items-center justify-center gap-2 rounded-full bg-lav-200 px-4 py-3.5 font-bold text-brand-deep" : `${btnPrimary} px-4`}
+            className={amGoing ? "inline-flex items-center justify-center gap-2 rounded-full bg-social-soft px-4 py-3.5 font-bold text-social" : `${btnPrimary} px-4`}
             aria-pressed={amGoing}
           >
             {amGoing ? <Check size={18} /> : <Plus size={18} />}
@@ -67,7 +72,7 @@ export default function EventDetail() {
             href={ev.ticketUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-brand px-4 py-3 font-bold text-brand hover:bg-lav-50"
+            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-brand px-4 py-3 font-bold text-brand hover:bg-surface"
           >
             Tickets <ExternalLink size={16} />
           </a>
@@ -77,7 +82,7 @@ export default function EventDetail() {
         <p className="mt-5 leading-relaxed text-ink/85">{ev.description}</p>
         <div className="mt-3 flex flex-wrap gap-1.5">
           {ev.tags.map((t) => (
-            <Chip key={t} small active={me.interests.includes(t)}>
+            <Chip key={t} small active={me.interests.includes(t)} tone="social">
               {t}
             </Chip>
           ))}
@@ -86,10 +91,10 @@ export default function EventDetail() {
 
       {/* Wer geht hin? */}
       <section className="mt-8 px-5">
-        <h2 className="flex items-center gap-2 text-lg font-extrabold text-brand-dark">
+        <h2 className="flex items-center gap-2 text-lg font-extrabold text-ink">
           <Users size={20} className="text-brand" /> Wer geht hin? <span className="text-muted">({people.length})</span>
         </h2>
-        <ul className="mt-3 divide-y divide-lav-100 rounded-2xl bg-lav-50">
+        <ul className="mt-3 divide-y divide-surface-2 rounded-2xl bg-surface">
           {people.map(({ p, common }) => {
             const row = (
               <>
@@ -106,7 +111,7 @@ export default function EventDetail() {
                     <p className="truncate text-xs text-muted">
                       {common.length > 0 ? (
                         <>
-                          <span className="font-bold text-brand">Gemeinsam:</span> {common.join(", ")}
+                          <span className="font-bold text-social">Gemeinsam:</span> {common.join(", ")}
                         </>
                       ) : (
                         p.interests.slice(0, 3).join(", ")
@@ -121,7 +126,7 @@ export default function EventDetail() {
                 {p.id === ME ? (
                   <div className="flex items-center gap-3 p-3">{row}</div>
                 ) : (
-                  <Link href={`/person/${p.id}`} className="flex items-center gap-3 p-3 hover:bg-lav-100">
+                  <Link href={`/person/${p.id}`} className="flex items-center gap-3 p-3 hover:bg-surface-2">
                     {row}
                   </Link>
                 )}
@@ -133,7 +138,7 @@ export default function EventDetail() {
 
       {/* Gruppen */}
       <section className="mt-8 px-5">
-        <h2 className="flex items-center gap-2 text-lg font-extrabold text-brand-dark">
+        <h2 className="flex items-center gap-2 text-lg font-extrabold text-ink">
           <MessageCircle size={20} className="text-brand" /> Gruppen für dieses Event
         </h2>
         <p className="text-sm text-muted">Tritt einer Gruppe bei oder gründe eine eigene.</p>
@@ -142,7 +147,7 @@ export default function EventDetail() {
             const member = g.memberIds.includes(ME);
             const members = g.memberIds.map((mid) => personById(mid, me)).filter(Boolean) as { id: string; name: string }[];
             return (
-              <li key={g.id} className="flex items-center gap-3 rounded-2xl border border-lav-200 p-3">
+              <li key={g.id} className="flex items-center gap-3 rounded-2xl border border-line p-3">
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-bold text-ink">{g.name}</p>
                   <div className="mt-1 flex items-center gap-2">
@@ -151,7 +156,7 @@ export default function EventDetail() {
                   </div>
                 </div>
                 {member ? (
-                  <Link href={`/chats/${g.id}`} className="rounded-full bg-lav-100 px-4 py-2 text-sm font-bold text-brand">
+                  <Link href={`/chats/${g.id}`} className="rounded-full bg-surface-2 px-4 py-2 text-sm font-bold text-brand">
                     Zum Chat
                   </Link>
                 ) : (
@@ -171,8 +176,8 @@ export default function EventDetail() {
         </ul>
 
         {creating ? (
-          <form onSubmit={submitGroup} className="mt-3 flex flex-col gap-2 rounded-2xl bg-lav-50 p-3">
-            <label className="text-sm font-bold text-brand-dark" htmlFor="gname">
+          <form onSubmit={submitGroup} className="mt-3 flex flex-col gap-2 rounded-2xl bg-surface p-3">
+            <label className="text-sm font-bold text-ink" htmlFor="gname">
               Name der Gruppe
             </label>
             <input
@@ -196,7 +201,7 @@ export default function EventDetail() {
         ) : (
           <button
             onClick={() => setCreating(true)}
-            className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-lav-400 py-3.5 font-bold text-brand hover:bg-lav-50"
+            className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-line-strong py-3.5 font-bold text-brand hover:bg-surface"
           >
             <Plus size={18} /> Neue Gruppe erstellen
           </button>

@@ -40,7 +40,7 @@ export default function Registrieren() {
       <div className="flex min-h-dvh flex-col">
         <BackHeader title="Schritt 2 von 2" />
         <div className="px-6">
-          <h1 className="text-2xl font-extrabold text-brand-dark">Was interessiert dich?</h1>
+          <h1 className="text-2xl font-extrabold text-ink">Was interessiert dich?</h1>
           <p className="mt-1 text-sm text-muted">Wähle mindestens 3. So zeigen wir dir passende Events und Leute.</p>
           <div className="mt-5 flex flex-wrap gap-2">
             {INTERESTS.map((i) => (
@@ -49,7 +49,7 @@ export default function Registrieren() {
               </Chip>
             ))}
           </div>
-          <label className="mt-6 flex items-start gap-3 rounded-xl bg-lav-50 p-3 text-sm text-ink/80">
+          <label className="mt-6 flex items-start gap-3 rounded-xl bg-surface p-3 text-sm text-ink/80">
             <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 size-5 accent-brand" />
             <span>
               Ich bin einverstanden, dass mein Profil (Vorname, Alter, Stadt, Interessen) anderen Nutzer:innen angezeigt wird. Ich kann mein Konto jederzeit löschen.
@@ -69,25 +69,25 @@ export default function Registrieren() {
     <div>
       <BackHeader title="Schritt 1 von 2" />
       <form onSubmit={next} className="flex flex-col gap-4 px-6">
-        <h1 className="text-2xl font-extrabold text-brand-dark">Konto erstellen</h1>
-        <label className="flex flex-col gap-1.5 text-sm font-semibold text-brand-dark">
+        <h1 className="text-2xl font-extrabold text-ink">Konto erstellen</h1>
+        <label className="flex flex-col gap-1.5 text-sm font-semibold text-ink">
           Vorname
           <input className={input} value={name} onChange={(e) => setName(e.target.value)} autoComplete="given-name" required />
         </label>
-        <label className="flex flex-col gap-1.5 text-sm font-semibold text-brand-dark">
+        <label className="flex flex-col gap-1.5 text-sm font-semibold text-ink">
           E-Mail
           <input className={input} type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" required />
         </label>
-        <label className="flex flex-col gap-1.5 text-sm font-semibold text-brand-dark">
+        <label className="flex flex-col gap-1.5 text-sm font-semibold text-ink">
           Passwort
           <input className={input} type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" required />
         </label>
         <div className="flex gap-3">
-          <label className="flex w-28 flex-col gap-1.5 text-sm font-semibold text-brand-dark">
+          <label className="flex w-28 flex-col gap-1.5 text-sm font-semibold text-ink">
             Alter
             <input className={input} inputMode="numeric" value={age} onChange={(e) => setAge(e.target.value.replace(/\D/g, ""))} required />
           </label>
-          <div className="flex flex-1 flex-col gap-1.5 text-sm font-semibold text-brand-dark">
+          <div className="flex flex-1 flex-col gap-1.5 text-sm font-semibold text-ink">
             Stadt
             <div className="flex gap-2">
               {(["Köln", "Bonn"] as const).map((c) => (
@@ -95,7 +95,7 @@ export default function Registrieren() {
                   type="button"
                   key={c}
                   onClick={() => setCity(c)}
-                  className={`flex-1 rounded-xl border py-3 font-semibold ${city === c ? "border-brand bg-brand text-white" : "border-lav-200 text-brand-dark"}`}
+                  className={`flex-1 rounded-xl border py-3 font-semibold ${city === c ? "border-ink bg-ink text-white" : "border-line text-ink"}`}
                   aria-pressed={city === c}
                 >
                   {c}
