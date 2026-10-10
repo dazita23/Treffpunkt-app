@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@import "@fontsource-variable/plus-jakarta-sans";
+
+/* Treffpunkt-Farben aus der Pitch-Präsentation */
+@theme {
+  --font-sans: "Plus Jakarta Sans Variable", system-ui, sans-serif;
+
+  --color-brand: #5229a5;        /* Hauptfarbe (Buttons, Akzente) */
+  --color-brand-dark: #49329e;   /* Überschriften */
+  --color-brand-deep: #2e1a6e;   /* dunkle Flächen */
+  --color-brand-bright: #5b21d6; /* Logo-Lila */
+  --color-lav-50: #f8f5fc;       /* Kartenhintergrund */
+  --color-lav-100: #ece8f6;      /* Icon-Kreise */
+  --color-lav-200: #d8c3f9;      /* Banner */
+  --color-lav-400: #a38fd8;      /* Linien */
+  --color-muted: #8e77c3;        /* Nebentexte */
+  --color-ink: #1e1b2e;          /* Fließtext */
+}
+
+html,
+body {
+  background: var(--color-lav-100);
+  color: var(--color-ink);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* dünne Scrollbar für horizontale Filterleisten ausblenden */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
