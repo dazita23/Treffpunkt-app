@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { LogOut, MessageCircle, Send } from "lucide-react";
 import { Avatar, AvatarStack, BackHeader, EmptyState } from "@/components/ui";
-import { ME, eventById, formatDay, personById, useApp } from "@/lib/store";
+import { ME, eventById, formatDay, formatTime, personById, useApp } from "@/lib/store";
 
 export default function ChatDetail() {
   const { id } = useParams<{ id: string }>();
@@ -19,7 +19,7 @@ export default function ChatDetail() {
     bottom.current?.scrollIntoView({ behavior: "smooth" });
   }, [g?.messages.length]);
 
-  if (!g || !me)
+  if (!g || !me || !eventById(g.eventId))
     return (
       <div>
         <BackHeader />
@@ -63,7 +63,7 @@ export default function ChatDetail() {
         <div className="min-w-0 flex-1 text-right">
           <p className="truncate text-xs font-bold text-ink">{ev.title}</p>
           <p className="text-xs text-muted">
-            {formatDay(ev.dayOffset)} · {ev.time} Uhr
+            {formatDay(ev.dayOffset)} · {formatTime(ev.time)}
           </p>
         </div>
       </Link>

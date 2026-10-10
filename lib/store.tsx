@@ -29,7 +29,7 @@ type State = {
 };
 
 const EMPTY: State = { account: null, loggedIn: false, going: [], groups: SEED_GROUPS, reports: [] };
-const KEY = "treffpunkt-prototyp-v1";
+const KEY = "treffpunkt-prototyp-v2"; // Version erhöhen, wenn sich die Events grundlegend ändern
 
 export const DEMO_ACCOUNT: Account = {
   name: "Alex",
@@ -219,6 +219,11 @@ export function eventDate(dayOffset: number) {
   d.setHours(0, 0, 0, 0);
   d.setDate(d.getDate() + dayOffset);
   return d;
+}
+
+// "20:00" -> "20:00 Uhr", Texte wie "ganztags" bleiben unverändert
+export function formatTime(time: string) {
+  return /^\d/.test(time) ? `${time} Uhr` : time;
 }
 
 export function formatDay(dayOffset: number) {

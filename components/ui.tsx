@@ -20,7 +20,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Category, EventItem } from "@/lib/data";
-import { ME, attendeesOf, eventDate, formatDay, shared, useApp } from "@/lib/store";
+import { ME, attendeesOf, eventDate, formatDay, formatTime, shared, useApp } from "@/lib/store";
 
 // ───────── App-Rahmen: Handy-Breite, Login-Schutz, Navigation ─────────
 
@@ -265,7 +265,7 @@ export function EventCard({ ev }: { ev: EventItem }) {
       <div className="p-4 pt-3">
         <h3 className="text-[17px] leading-snug font-bold text-ink">{ev.title}</h3>
         <p className="mt-0.5 text-sm text-muted">
-          {formatDay(ev.dayOffset)}, {ev.time} Uhr · {ev.venue}, {ev.city}
+          {formatDay(ev.dayOffset)}, {formatTime(ev.time)} · {ev.venue}, {ev.city}
         </p>
         <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-2">
           <AvatarStack people={people} max={3} />

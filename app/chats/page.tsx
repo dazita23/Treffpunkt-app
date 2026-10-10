@@ -8,7 +8,7 @@ import { EmptyState, EventVisual, PageTitle, btnPrimary } from "@/components/ui"
 export default function Chats() {
   const { groups, me } = useApp();
   const mine = groups
-    .filter((g) => g.memberIds.includes(ME))
+    .filter((g) => g.memberIds.includes(ME) && eventById(g.eventId))
     .sort((a, b) => (b.messages.at(-1)?.at ?? 0) - (a.messages.at(-1)?.at ?? 0));
 
   return (

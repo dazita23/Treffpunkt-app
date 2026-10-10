@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Check, ExternalLink, MapPin, MessageCircle, Plus, Ticket, Users } from "lucide-react";
 import { Avatar, AvatarStack, BackHeader, Chip, DateStub, EmptyState, EventVisual, btnPrimary, input } from "@/components/ui";
-import { ME, attendeesOf, eventById, formatDay, personById, shared, useApp } from "@/lib/store";
+import { ME, attendeesOf, eventById, formatDay, formatTime, personById, shared, useApp } from "@/lib/store";
 
 export default function EventDetail() {
   const { id } = useParams<{ id: string }>();
@@ -47,7 +47,7 @@ export default function EventDetail() {
           </span>
         </div>
         <p className="mt-4 text-sm font-semibold text-muted">
-          {formatDay(ev.dayOffset)} · {ev.time} Uhr
+          {formatDay(ev.dayOffset)} · {formatTime(ev.time)}
         </p>
         <h1 className="mt-1 text-2xl leading-tight font-extrabold text-ink">{ev.title}</h1>
         <div className="mt-3 space-y-1.5 text-sm text-ink/80">

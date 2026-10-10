@@ -8,7 +8,7 @@ import { CategoryDot, Chip, EmptyState, EventCard, LogoHeader, input } from "@/c
 
 // Entdecken: Eventübersicht mit Filter nach Kategorie und Datum
 
-const DATE_FILTERS = ["Alle", "Heute", "Morgen", "Wochenende", "Nächste 7 Tage"] as const;
+const DATE_FILTERS = ["Alle", "Heute", "Morgen", "Wochenende", "Nächste 7 Tage", "Nächste 30 Tage"] as const;
 type DateFilter = (typeof DATE_FILTERS)[number];
 
 function matchesDate(dayOffset: number, f: DateFilter) {
@@ -16,6 +16,7 @@ function matchesDate(dayOffset: number, f: DateFilter) {
   if (f === "Heute") return dayOffset === 0;
   if (f === "Morgen") return dayOffset === 1;
   if (f === "Nächste 7 Tage") return dayOffset <= 7;
+  if (f === "Nächste 30 Tage") return dayOffset <= 30;
   // Wochenende: dieses bzw. kommendes Freitag–Sonntag
   const dow = new Date().getDay(); // 0 = Sonntag
   const start = dow >= 5 || dow === 0 ? 0 : 5 - dow;
